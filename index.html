@@ -68,6 +68,11 @@
   .brandmark{height:48px;width:auto;display:block}
   .foot-brandmark{height:54px;width:auto;display:block;margin-bottom:6px}
   .hero .tagline{color:var(--accent);font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:.82rem;margin:16px 0 -4px}
+  .pillars{background:#071b30;border-top:1px solid rgba(0,180,216,.35)}
+  .pillars .wrap{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 20px;padding:16px 0}
+  .pillars span{font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#dbe9ff}
+  .pillars i{width:1px;height:14px;background:var(--accent);display:inline-block}
+  @media(max-width:600px){.pillars i{display:none}}
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
   header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
@@ -241,6 +246,11 @@
     </div>
   </div>
 </section>
+<div class="pillars">
+  <div class="wrap">
+    <span>AI Strategy</span><i></i><span>Digital Transformation</span><i></i><span>Delivery Excellence</span><i></i><span>Talent Solutions</span>
+  </div>
+</div>
 <div class="trust">
   <div class="wrap">
     <div class="t-label">Why leaders partner with us</div>
@@ -339,11 +349,15 @@
         <div class="ci reveal"><div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><b>Visit Us</b><p>Chicago, IL</p></div></div>
         <div class="ci reveal"><div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div><b>Online</b><a href="https://ismassociate.com" target="_blank" rel="noopener">ismassociate.com</a></div></div>
       </div>
-      <form onsubmit="handleSubmit(event)">
-        <div class="row2"><div class="fld"><label for="name">Full Name</label><input id="name" type="text" placeholder="Jane Doe" required></div><div class="fld"><label for="company">Company</label><input id="company" type="text" placeholder="Company name"></div></div>
-        <div class="row2"><div class="fld"><label for="email">Work Email</label><input id="email" type="email" placeholder="you@company.com" required></div><div class="fld"><label for="phone">Phone</label><input id="phone" type="tel" placeholder="(312) 000-0000"></div></div>
-        <div class="fld"><label for="interest">How can we help?</label><select id="interest"><option>Enterprise AI Strategy</option><option>AI Readiness Assessment</option><option>AI Automation</option><option>Digital Transformation</option><option>Enterprise Delivery Excellence</option><option>Training &amp; Leadership Development</option><option>Technology Talent Solutions</option><option>Executive / Strategy Call</option></select></div>
-        <div class="fld"><label for="msg">Tell us about your goals</label><textarea id="msg" placeholder="A few sentences on where you are and what you're trying to achieve..."></textarea></div>
+      <form id="contactForm" action="https://formsubmit.co/info@ismassociate.com" method="POST">
+        <input type="hidden" name="_subject" value="New inquiry from ismassociate.com">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="row2"><div class="fld"><label for="name">Full Name</label><input id="name" name="Name" type="text" placeholder="Jane Doe" required></div><div class="fld"><label for="company">Company</label><input id="company" name="Company" type="text" placeholder="Company name"></div></div>
+        <div class="row2"><div class="fld"><label for="email">Work Email</label><input id="email" name="Email" type="email" placeholder="you@company.com" required></div><div class="fld"><label for="phone">Phone</label><input id="phone" name="Phone" type="tel" placeholder="(312) 000-0000"></div></div>
+        <div class="fld"><label for="interest">How can we help?</label><select id="interest" name="Interest"><option>Enterprise AI Strategy</option><option>AI Readiness Assessment</option><option>AI Automation</option><option>Digital Transformation</option><option>Enterprise Delivery Excellence</option><option>Training &amp; Leadership Development</option><option>Technology Talent Solutions</option><option>Executive / Strategy Call</option></select></div>
+        <div class="fld"><label for="msg">Tell us about your goals</label><textarea id="msg" name="Message" placeholder="A few sentences on where you are and what you're trying to achieve..."></textarea></div>
         <button class="btn btn-primary btn-lg" type="submit">Schedule a Strategy Call</button>
         <p class="form-note" id="formNote">We typically respond within one business day.</p>
       </form>
@@ -368,7 +382,18 @@
   document.getElementById('yr').textContent=new Date().getFullYear();
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-  function handleSubmit(e){e.preventDefault();var note=document.getElementById('formNote');note.textContent="Thanks! This demo form isn't connected yet — email info@ismassociate.com or call 312.282.9270 and we'll follow up within one business day.";note.style.color="#1b6cd4";e.target.querySelector('button').textContent="Message ready ✓";}
+  var cf=document.getElementById('contactForm');
+  if(cf){
+    cf.addEventListener('submit',function(e){
+      e.preventDefault();
+      var note=document.getElementById('formNote'), btn=cf.querySelector('button[type=submit]');
+      btn.disabled=true; btn.textContent="Sending…";
+      fetch("https://formsubmit.co/ajax/info@ismassociate.com",{method:"POST",headers:{'Accept':'application/json'},body:new FormData(cf)})
+        .then(function(r){return r.json();})
+        .then(function(){note.textContent="Thanks — your message is on its way. We'll reply within one business day.";note.style.color="#1b6cd4";btn.textContent="Message sent ✓";cf.reset();})
+        .catch(function(){note.textContent="Sorry, something went wrong. Please email info@ismassociate.com or call 312.282.9270.";note.style.color="#c0392b";btn.disabled=false;btn.textContent="Schedule a Strategy Call";});
+    });
+  }
 </script>
 </body>
 </html>
