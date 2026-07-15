@@ -341,7 +341,7 @@
 </section>
 <section id="contact">
   <div class="wrap">
-    <div class="intro center reveal"><span class="eyebrow">Get In Touch</span><h2 class="section-title">Let's talk about your transformation</h2><p class="lead" style="margin:14px auto 0">Schedule a consultation, request an AI Readiness Assessment, or talk with an expert about strategy, delivery, training, or talent.</p></div>
+    <div class="intro center reveal"><span class="eyebrow">Get In Touch</span><h2 class="section-title">Let's talk about your transformation</h2><p class="lead" style="margin:14px auto 0">Schedule a consultation, request an AI Readiness Assessment, verify employment, or talk with an expert about strategy, delivery, training, or talent.</p></div>
     <div class="contact-grid">
       <div class="contact-info">
         <div class="ci reveal"><div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><b>Call Us</b><a href="tel:+16302824390">630-282-4390</a></div></div>
@@ -356,9 +356,9 @@
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="row2"><div class="fld"><label for="name">Full Name</label><input id="name" name="Name" type="text" placeholder="Jane Doe" required></div><div class="fld"><label for="company">Company</label><input id="company" name="Company" type="text" placeholder="Company name"></div></div>
         <div class="row2"><div class="fld"><label for="email">Work Email</label><input id="email" name="Email" type="email" placeholder="you@company.com" required></div><div class="fld"><label for="phone">Phone</label><input id="phone" name="Phone" type="tel" placeholder="(630) 000-0000"></div></div>
-        <div class="fld"><label for="interest">How can we help?</label><select id="interest" name="Interest"><option>Enterprise AI Strategy</option><option>AI Readiness Assessment</option><option>AI Automation</option><option>Digital Transformation</option><option>Enterprise Delivery Excellence</option><option>Training &amp; Leadership Development</option><option>Technology Talent Solutions</option><option>Executive / Strategy Call</option></select></div>
+        <div class="fld"><label for="interest">How can we help?</label><select id="interest" name="Interest"><option>Enterprise AI Strategy</option><option>AI Readiness Assessment</option><option>AI Automation</option><option>Digital Transformation</option><option>Enterprise Delivery Excellence</option><option>Training &amp; Leadership Development</option><option>Technology Talent Solutions</option><option>Employment Verification</option><option>Executive / Strategy Call</option><option>General Inquiry</option></select></div>
         <div class="fld"><label for="msg">Tell us about your goals</label><textarea id="msg" name="Message" placeholder="A few sentences on where you are and what you're trying to achieve..."></textarea></div>
-        <button class="btn btn-primary btn-lg" type="submit">Schedule a Strategy Call</button>
+        <button class="btn btn-primary btn-lg" type="submit">Submit</button>
         <p class="form-note" id="formNote">We typically respond within one business day.</p>
       </form>
     </div>
@@ -390,8 +390,8 @@
       btn.disabled=true; btn.textContent="Sending…";
       fetch("https://formsubmit.co/ajax/info@ismassociate.net",{method:"POST",headers:{'Accept':'application/json'},body:new FormData(cf)})
         .then(function(r){return r.json();})
-        .then(function(){note.textContent="Thanks — your message is on its way. We'll reply within one business day.";note.style.color="#1b6cd4";btn.textContent="Message sent ✓";cf.reset();})
-        .catch(function(){note.textContent="Sorry, something went wrong. Please email info@ismassociate.net or call 630-282-4390.";note.style.color="#c0392b";btn.disabled=false;btn.textContent="Schedule a Strategy Call";});
+        .then(function(){note.textContent="Thanks — your message has been sent. We'll get back to you within one business day.";note.style.color="#1b6cd4";btn.textContent="Sent ✓";cf.reset();})
+        .catch(function(){note.textContent="Sorry, something went wrong. Please email info@ismassociate.net or call 630-282-4390.";note.style.color="#c0392b";btn.disabled=false;btn.textContent="Submit";});
     });
   }
 </script>
